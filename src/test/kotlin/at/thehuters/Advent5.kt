@@ -8,13 +8,28 @@ import java.io.File
 
 class Advent5 {
 
-    @Test
-    fun advent_1() {
-        val resourceName = "advent5-1.txt"
-        val linesOfFile =javaClass.classLoader.getResource(resourceName)?.let { resource -> File(resource.file).useLines { it.toList() } }
+    private fun listOfStrings(fileName: String): List<String> {
+        return javaClass.classLoader.getResource(fileName)?.
+        let { resource -> File(resource.file).useLines { it.toList() } }!!
+    }
 
-        linesOfFile?.forEach {
-            println(it)
-        }
+    @Test
+    fun advent_1_small() {
+        val linesOfFile = listOfStrings("5/1-0.txt")
+    }
+
+    @Test
+    fun advent_1_large() {
+        val linesOfFile = listOfStrings("5/1-1.txt")
+    }
+
+    @Test
+    fun advent_2_small() {
+        val linesOfFile = listOfStrings("5/2-1.txt")
+    }
+
+    @Test
+    fun advent_2_large() {
+        val linesOfFile = listOfStrings("5/2-2.txt")
     }
 }
