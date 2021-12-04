@@ -5,18 +5,17 @@ import java.io.File
 
 
 
-class Advent5 {
+
+class Advent6 {
 
     companion object {
-        const val DAY="5"
+        const val DAY="6"
     }
 
     private fun listOfStrings(fileName: String): List<String> {
         return javaClass.classLoader.getResource(fileName)?.
         let { resource -> File(resource.file).useLines { it.toList() } }!!
     }
-
-
 
     @Test
     fun advent_1_small() {
