@@ -52,29 +52,16 @@ class Advent5 {
         return
     }
 
-    private fun fissure(left: Point, right: Point): Collection<Point> {
+    private fun fissure(start: Point, stop: Point): Collection<Point> {
         val fissurePoints = mutableListOf<Point>()
-        val xDir = if (left.x < right.x) {
-            1
-        } else if (left.x > right.x) {
-            -1
-        } else {
-            0
-        }
-        val yDir = if (left.y < right.y) {
-            1
-        } else if (left.y > right.y) {
-            -1
-        } else {
-            0
-        }
-        var iterPoint = left.copy();
-        while (iterPoint != right) {
+        val xDir = compareValues(stop.x,start.x)
+        val yDir = compareValues(stop.y,start.y)
+        var iterPoint = start.copy();
+        while (iterPoint != stop) {
             fissurePoints.add(iterPoint)
             iterPoint = iterPoint.copy(x = iterPoint.x+xDir, y = iterPoint.y+yDir)
         }
         fissurePoints.add(iterPoint)
-
         return fissurePoints
     }
 }
