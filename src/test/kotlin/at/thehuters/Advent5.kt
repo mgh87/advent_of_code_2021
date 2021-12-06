@@ -3,6 +3,7 @@ package at.thehuters
 import org.junit.jupiter.api.Test
 import java.util.function.BiPredicate
 import kotlin.math.abs
+import kotlin.system.measureTimeMillis
 
 class Advent5 {
 
@@ -31,8 +32,8 @@ class Advent5 {
     @Test
     fun advent_2_large() {
         val linesOfFile = readInput(DAY,"2")
-        advent_5(linesOfFile) { start, stop -> start.x == stop.x || start.y == stop.y || abs(start.x-stop.y) == abs(start.y-stop.x) || abs(start.x-stop.x) == abs(start.y-stop.y)  }
-    }
+        println(measureTimeMillis { advent_5(linesOfFile) { start, stop -> start.x == stop.x || start.y == stop.y || abs(start.x-stop.y) == abs(start.y-stop.x) || abs(start.x-stop.x) == abs(start.y-stop.y)  }
+    })}
 
     data class Point(val x: Int, val y: Int)
 
