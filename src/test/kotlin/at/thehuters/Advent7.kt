@@ -42,17 +42,17 @@ class Advent7 {
         val splitCrabs = linesOfFile[0]
             .split(",")
             .map { s -> s.toInt()}
-        splitCrabs
-            .distinct()
-            .map { position -> Pair(position, splitCrabs.fold(0){ acc, i ->
-                val n = (i-position).absoluteValue
-                acc + fuelCost(n)
-            }) }
+        val min = splitCrabs.minOrNull()!!
+        val max = splitCrabs.maxOrNull()!!
+        IntRange(min,max).map { position -> Pair(position, splitCrabs.fold(0){ acc, i ->
+            val n = (i-position).absoluteValue
+            acc + fuelCost(n)
+        }) }
             .minByOrNull { pair ->
-            pair.second
-        }?.let {
-            println("$it")
-        }
+                pair.second
+            }?.let {
+                println("$it")
+            }
     }
 
 }
