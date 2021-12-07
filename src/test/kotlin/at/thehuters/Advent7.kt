@@ -39,12 +39,12 @@ class Advent7 {
 
 
     private fun advent6(linesOfFile: List<String>, fuelCost: (Int) -> Int) {
-        val startFish = linesOfFile[0]
+        val splitCrabs = linesOfFile[0]
             .split(",")
             .map { s -> s.toInt()}
-        startFish
+        splitCrabs
             .distinct()
-            .map { position -> Pair(position, startFish.fold(0){ acc, i ->
+            .map { position -> Pair(position, splitCrabs.fold(0){ acc, i ->
                 val n = (i-position).absoluteValue
                 acc + fuelCost(n)
             }) }
