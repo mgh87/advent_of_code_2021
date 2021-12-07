@@ -39,10 +39,13 @@ class Advent7 {
     private fun advent6(linesOfFile: List<String>) {
         val startFish = linesOfFile[0]
             .split(",")
-            .map { s -> Integer.valueOf(s) }
+            .map { s -> s.toInt()}
         startFish
             .distinct()
-            .map { line -> Pair(line, startFish.fold(0){ acc, i -> acc + (i-line).absoluteValue}) }
+            .map { position -> Pair(position, startFish.fold(0){ acc, i ->
+                val n = (i-position).absoluteValue
+                acc + n*(n+1)/2
+            }) }
             .minByOrNull { pair ->
             pair.second
         }?.let {
