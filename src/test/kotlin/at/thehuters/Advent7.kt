@@ -7,38 +7,38 @@ import kotlin.math.absoluteValue
 class Advent7 {
 
     companion object {
-        const val DAY="6"
+        const val DAY="7"
     }
 
-    val identity = { n: Int -> n }
-    val sum = { n: Int -> n*(n+1)/2 }
+    private val identity = { n: Int -> n }
+    private val sum = { n: Int -> n*(n+1)/2 }
 
     @Test
     fun advent_1_small() {
         val linesOfFile = readInput(DAY,"1")
-        advent6(linesOfFile, identity)
+        advent7(linesOfFile, identity)
     }
 
     @Test
     fun advent_1_large() {
         val linesOfFile = readInput(DAY,"2")
-        advent6(linesOfFile, identity)
+        advent7(linesOfFile, identity)
     }
 
     @Test
     fun advent_2_small() {
         val linesOfFile = readInput(DAY,"1")
-        advent6(linesOfFile, sum)
+        advent7(linesOfFile, sum)
     }
 
     @Test
     fun advent_2_large() {
         val linesOfFile = readInput(DAY,"2")
-        advent6(linesOfFile, sum)
+        advent7(linesOfFile, sum)
     }
 
 
-    private fun advent6(linesOfFile: List<String>, fuelCost: (Int) -> Int) {
+    private fun advent7(linesOfFile: List<String>, fuelCost: (Int) -> Int) {
         val splitCrabs = linesOfFile[0]
             .split(",")
             .map { s -> s.toInt()}
