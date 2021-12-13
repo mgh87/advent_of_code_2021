@@ -8,7 +8,7 @@ typealias Range = ( List<Int> ) -> IntRange
 class Advent7 {
 
     companion object {
-        const val DAY="7"
+        const val DAY="13"
     }
 
     private val identity = { n: Int -> n }
