@@ -22,9 +22,57 @@ class Advent14 {
                     rFind.output+rFind.input[1]
                 } ?: it
             }.fold(input.first().toString()) { acc, c -> acc.plus(c) }
-            println("After ${i+1} steps: $input")
+            //println("After ${i+1} steps: $input")
+            println("After ${i+1} steps")
         }
-     
+        val groupedByLetter = input.groupBy { it }
+        val counts = groupedByLetter.map { entry -> entry.value.count() }
+        println(counts.maxOrNull()!!-counts.minOrNull()!!)
+    }
+
+    private fun advent14_2(linesOfFile: List<String>, steps: Int) {
+        val muLinesOfFile = linesOfFile.toMutableList()
+        var input = muLinesOfFile.removeFirst()
+        muLinesOfFile.removeFirst()
+        val reactions = muLinesOfFile.map { line -> line.split(" -> ") }.map { Reaction(it[0],it[1]) }.toSet()
+        var inputPaarMap = input.windowed(2,1).groupBy { it }.entries.associate { it.key to it.value.count().toLong() }
+        for (i in 0 until steps){
+            val outputMap = mutableMapOf<String,Long>()
+            inputPaarMap.forEach{
+                val reaction = reactions.find { reaction -> reaction.input == it.key }!!
+                outputMap[it.key[0]+reaction.output] = (outputMap[it.key[0]+reaction.output] ?: 0) + it.value
+                outputMap[reaction.output+it.key[1]] = (outputMap[reaction.output+it.key[1]] ?: 0) +it.value
+            }
+            inputPaarMap = outputMap
+            //println("After ${i+1} steps: $input")
+            println("After ${i+1} steps")
+        }
+        val listPairs = inputPaarMap.map {
+            val result = mutableListOf<Pair<Char,Long>>()
+            result.add(Pair(it.key[0],it.value))
+            result.add(Pair(it.key[1],it.value))
+            result
+        }.flatten()
+        val resultList = mutableListOf<Pair<Char,Long>>()
+        for (i in listPairs){
+            val newPair = resultList.find { i.first == it.first }?.let {
+                resultList.removeAt(resultList.indexOf(it))
+                Pair(
+                    i.first,
+                    it.second + i.second
+                )
+            } ?: Pair(
+                i.first,
+                i.second
+            )
+            resultList.add(newPair)
+        }
+        resultList.forEach {
+            println("$it : ${it.second/2}")
+        }
+        val counts = resultList.map { it.second/2 }
+        println("Result is off by -1 or -2")
+        println(counts.maxOrNull()!!-counts.minOrNull()!!)
     }
 
     @Test
@@ -42,13 +90,13 @@ class Advent14 {
     @Test
     fun advent_2_small() {
         val linesOfFile = readInput(DAY, "1")
-        advent14(linesOfFile,10)
+        advent14_2(linesOfFile,40)
     }
 
     @Test
     fun advent_2_large() {
         val linesOfFile = readInput(DAY, "2")
-        advent14(linesOfFile,10)
+        advent14_2(linesOfFile,40)
     }
 
 }
