@@ -2,6 +2,8 @@ package at.thehuters
 
 import org.junit.jupiter.api.Test
 import java.lang.RuntimeException
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class Advent14 {
 
@@ -68,10 +70,10 @@ class Advent14 {
             resultList.add(newPair)
         }
         resultList.forEach {
-            println("$it : ${it.second/2}")
+            (it.second.toDouble()/2).roundToInt()
+            println("$it : ${it.second/2} : ${(it.second.toDouble()/2).roundToLong()}")
         }
-        val counts = resultList.map { it.second/2 }
-        println("Result is off by -1 or -2")
+        val counts = resultList.map { (it.second.toDouble()/2).roundToLong() }
         println(counts.maxOrNull()!!-counts.minOrNull()!!)
     }
 
